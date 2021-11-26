@@ -34,3 +34,6 @@ class Pane:
     def _send_keys(self, cmd):
         # command = self._format_command(cmd)
         run_command(f"tmux send-keys -t {self.session_name}:{self.window_name}.{self.pane_name} {cmd}")
+
+
+

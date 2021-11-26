@@ -4,6 +4,7 @@ import os
 import json
 from tmux_projector.utils import run_command
 from tmux_projector.models.session import Session
+from tmux_projector.validator import ConfigValidator
 
 
 class TmuxProjector:
@@ -51,6 +52,7 @@ class TmuxProjector:
 
     def _load_config(self):
         session_json = yaml.load(open('.tmux_projector.yaml'), Loader=yaml.FullLoader)
+        validator = ConfigValidator().validate(session_json)
         session = Session.from_json(session_json)
         return session 
 
@@ -81,3 +83,4 @@ class TmuxProjector:
         reattach_command = f'tmux attach -t {session.session_name}'
         run_command(reattach_command)
 
+    

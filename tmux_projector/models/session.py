@@ -15,8 +15,8 @@ class Session:
     def add_option(self, option, value):
         self.options[option] = value
 
-    def create_window(self, window_name):
-        window = Window(window_name, self.session_name)
+    def create_window(self, window_json):
+        window = Window.from_json(window_json, self.session_name)
         self.windows.append(window)
         return window
 
@@ -24,7 +24,7 @@ class Session:
     def from_json(session_json):
         session = Session(session_json['session_name'], session_json['options'])
         for window_json in session_json['windows']:
-            window = session.create_window(window_json['window_name'])
+            window = session.create_window(window_json)
             for pane_json in window_json['panes']:
                 pane = window.create_pane()
                 pane._load_config_from_json(pane_json)
@@ -55,7 +55,7 @@ class Session:
             print(f"tmux attach -t {self.session_name}")
 
     def kill(self):
-        kill_command = f'tmux kill-session -t {session.session_name}'
+        kill_command = f'tmux kill-session -t {self.session_name}'
         run_command(kill_command)
 
 
