@@ -2,7 +2,6 @@ import sys
 import math
 import random
 from tmux_projector.exceptions import ValidationException
-from tmux_projector.models.window import PseudoWindow
 
 ALLOWED_LAYOUTS = ['even-horizontal', 'even-vertical', 'main-horizontal', 'main-vertical', 'tiled']
 
