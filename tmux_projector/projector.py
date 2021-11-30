@@ -19,7 +19,7 @@ class TmuxProjector:
         """ 
         session = Session(session_name='test')
         session.add_option('auto_attach', True)
-        window = session.create_window('test-window')
+        window = session.create_window({'window_name': 'test-window', 'layout': None})
         pane = window.create_pane()
         pane.dir = os.getcwd()
         pane.cmd = 'echo test'

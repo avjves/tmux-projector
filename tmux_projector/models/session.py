@@ -3,6 +3,7 @@ from collections import OrderedDict
 from tmux_projector.utils import run_command
 from tmux_projector.utils import debug_print
 from tmux_projector.models.window import Window
+from tmux_projector.models.options import OptionsManager
 
 
 class Session:
@@ -11,6 +12,9 @@ class Session:
         self.session_name = session_name
         self.windows = []
         self.options_manager = OptionsManager(session_name, options)
+
+    def add_option(self, option, value):
+        self.options_manager.set_option(option, value)
 
     def create_window(self, window_json):
         window = Window.from_json(window_json, self.session_name)
@@ -75,24 +79,4 @@ class Session:
         return True
 
 
-class OptionsManager:
 
-    def __init__(self, session_name, options):
-        self.session_name = session_name
-        self.options = options if options else {}
-
-    def apply_options(self):
-        self._apply_mouse()
-
-    def set_option(self, option, value):
-        self.options[option] = value
-
-    def get_option(self, option):
-        return self.options.get(option, None)
-
-    def _apply_mouse(self):
-        mouse_enabled = self.get_option('mouse')
-        if mouse_enabled != None:
-            value = 'on' if mouse_enabled else 'off'
-            mouse_command = f'tmux set -g mouse {value}'
-            run_command(mouse_command)

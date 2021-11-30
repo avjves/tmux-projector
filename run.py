@@ -1,27 +1,4 @@
-import argparse
+import sys
+from tmux_projector.run import main
 
-from tmux_projector.projector import TmuxProjector
-
-
-
-if __name__ == "__main__":
-
-    parser = argparse.ArgumentParser(description='Tmux projector')
-    subparser = parser.add_subparsers(help='Action to take', dest='action', required=True)
-
-    init_parser = subparser.add_parser('init')
-
-    start_parser = subparser.add_parser('start')
-    start_parser.add_argument('--restart', action='store_true')
-
-    kill_parser = subparser.add_parser('kill')
-
-    args = parser.parse_args()
-
-    projector = TmuxProjector()
-    if args.action == 'init':
-        projector.initialize_project()
-    elif args.action == 'kill':
-        projector.kill()
-    else:
-        projector.run(args)
+sys.exit(main())
