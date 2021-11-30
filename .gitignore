@@ -2,3 +2,6 @@ __pycache__/
 .tmux_projector.yaml
 *.pyc
 tags
+build/
+dist/
+*.egg-info
