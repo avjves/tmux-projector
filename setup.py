@@ -3,7 +3,7 @@ import setuptools
 
 setuptools.setup(
     name="tmux-projector",
-    version="0.0.2",
+    version="0.0.5",
     author_email="avjves@gmail.com",
     description="Tool to start tmux projects more easily",
     packages=setuptools.find_packages(),

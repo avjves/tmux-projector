@@ -19,7 +19,6 @@ def main():
     global_parser.add_argument('--name', help="Name the current project for global usage", required=True)
 
     args = parser.parse_args()
-    print(args)
 
     projector = TmuxProjector()
     if args.action == 'init':
